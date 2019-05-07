@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProjetoPA2</string>
+    <string name="navigation_drawer_open">Abrir Navigation</string>
+    <string name="navigation_drawer_close">Fechar Navigation</string>
 </resources>

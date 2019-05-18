@@ -2,6 +2,7 @@ package br.com.willtrkapp.projetopa2
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
@@ -27,6 +28,16 @@ class MainActivity : AppCompatActivity() {
             )
         drawer_layout.addDrawerListener(abreFechaToogle)
         abreFechaToogle.syncState()
+
+
+        setaFragment(HomeFragment())
+    }
+
+    fun setaFragment(pFragment: Fragment)
+    {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frament_container, pFragment)
+        fragmentTransaction.commit()
     }
 
     override fun onBackPressed() {

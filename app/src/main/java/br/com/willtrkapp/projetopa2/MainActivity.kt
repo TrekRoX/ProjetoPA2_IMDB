@@ -2,13 +2,15 @@ package br.com.willtrkapp.projetopa2
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,15 +31,11 @@ class MainActivity : AppCompatActivity() {
         drawer_layout.addDrawerListener(abreFechaToogle)
         abreFechaToogle.syncState()
 
+        //Listerner dos clicks de menu
+        nav_view.setNavigationItemSelectedListener(this)
 
-        setaFragment(HomeFragment())
-    }
-
-    fun setaFragment(pFragment: Fragment)
-    {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frament_container, pFragment)
-        fragmentTransaction.commit()
+        //Setando fragment home
+        supportFragmentManager.beginTransaction().replace(R.id.frament_container, HomeFragment()).commit()
     }
 
     override fun onBackPressed() {
@@ -47,5 +45,24 @@ class MainActivity : AppCompatActivity() {
         else  {
             super.onBackPressed()
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        var retorno: Boolean = false
+        when(item.itemId){
+            //Menu home
+            R.id.nav_home ->{
+                //Setando fragment home
+                supportFragmentManager.beginTransaction().replace(R.id.frament_container, HomeFragment()).commit()
+                retorno = true
+            }
+            //Menu sair
+            R.id.nav_exit -> {
+                finish()
+                retorno = true
+            }
+        }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return retorno
     }
 }

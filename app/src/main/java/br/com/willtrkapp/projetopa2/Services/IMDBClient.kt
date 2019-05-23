@@ -1,5 +1,6 @@
 package br.com.willtrkapp.projetopa2.Services
 
+import android.util.Log
 import br.com.willtrkapp.projetopa2.MainActivity
 import br.com.willtrkapp.projetopa2.Models.Movie
 import okhttp3.Interceptor
@@ -46,7 +47,35 @@ class IMDBClient(mainActivity: MainActivity) {
 
     fun findMovie(title: String){
 
+
         endpointsApi.getFilmByTitle(title).enqueue(
+
+            object : Callback<Movie> {
+                override fun onFailure(call: Call<Movie>, t: Throwable) {
+                    call.cancel()
+                    callback?.onRequestFail(t)
+                }
+
+                override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+                    val body = response.body()
+                    if (body != null){
+
+                        if (body.response.equals("False")){
+                            callback?.onResponseFail(body)
+                        }
+                        else{
+                            callback?.onResponse(body)
+                        }
+                    }
+                }
+
+            }
+        )
+    }
+
+    fun findMovieById(idIMDB: String){
+
+        endpointsApi.getFilmById(idIMDB).enqueue(
 
             object : Callback<Movie> {
                 override fun onFailure(call: Call<Movie>, t: Throwable) {

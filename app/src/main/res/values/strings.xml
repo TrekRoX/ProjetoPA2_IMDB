@@ -5,4 +5,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imdbid">ID IMDB</string>
+    <string name="titulo">Título</string>
+    <string name="ano">Ano</string>
+    <string name="Tipo">Tipo</string>
 </resources>

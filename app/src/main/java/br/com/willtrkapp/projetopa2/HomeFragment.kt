@@ -82,11 +82,15 @@ class HomeFragment : Fragment() {
 
             if(nomeFilme.trim().length > 0)
             {
+                idIMDBEditText.setText("");
+
                 //Buscar pelo titulo
                 //imdbClient.searchListMovies(nomeFilme)
                 imdbClient.findMovie(nomeFilme)
             }
             else if (idIMBD.trim().length > 0) {
+                titFilmEditText.setText("");
+
                 //Buscar pelo ID
                 imdbClient.findMovieById(idIMBD)
 
